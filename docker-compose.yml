@@ -1,0 +1,13 @@
+version: '3.8'
+
+services:
+  db:
+    image: postgres:15
+    container_name: finance-api-db
+    environment:
+      POSTGRES_USER: bank_admin
+      POSTGRES_PASSWORD: haslo
+      POSTGRES_DB: finance-api_database
+    ports:
+      - "5432:5432"
+    restart: always

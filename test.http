@@ -1,0 +1,40 @@
+### Get all users
+GET http://localhost:8080/api/users
+
+### Add new user
+POST http://localhost:8080/api/users
+Content-Type: application/json
+
+{
+  "firstName": "Roman",
+  "lastName": "Kowalski",
+  "email": "roman.kowalski@example.com",
+  "password": "mojetajnehaslo",
+  "pesel": "80010112345"
+}
+
+### Get all accounts
+GET http://localhost:8080/api/accounts
+
+### Get users accounts
+GET http://localhost:8080/api/accounts/user/1
+
+### Add new account
+POST http://localhost:8080/api/accounts/user/4
+Content-Type: application/json
+
+{
+    "accountNumber": "PL57102030402160708080122137",
+    "balance": 1100.50,
+    "currency": "PLN"
+}
+
+### Transfer money from account
+POST http://localhost:8080/api/accounts/transfer
+Content-Type: application/json
+
+{
+  "accountId": 1,
+  "receiverAccountNumber": "PL57102030402160708080122137",
+  "amount": 50.00
+}
