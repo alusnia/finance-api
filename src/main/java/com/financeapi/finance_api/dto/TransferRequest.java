@@ -6,30 +6,23 @@ public class TransferRequest {
 
 	private Long accountId;
 	private String receiverAccountNumber;
+	private String title;
 	private BigDecimal amount;
 
 	public Long getAccountId() {
 		return accountId;
 	}
 
-	public void setAccountId(Long accountId) {
-		this.accountId = accountId;
-	}
-
 	public String getReceiverAccountNumber() {
 		return receiverAccountNumber;
 	}
 
-	public void setReceiverAccountNumber(String receiverAccountNumber) {
-		this.receiverAccountNumber = receiverAccountNumber;
+	public String getTitle() {
+		return title;
 	}
 
 	public BigDecimal getAmount() {
 		return amount;
-	}
-
-	public void setAmount(BigDecimal amount) {
-		this.amount = amount;
 	}
 
 }

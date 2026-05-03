@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 
 import java.math.BigDecimal;
 
+@lombok.Getter
 @Entity
 @Table(name = "accounts")
 public class Account {
@@ -21,6 +22,7 @@ public class Account {
 	@Column(nullable = false, length = 3)
 	private String currency;
 
+	@lombok.Setter
 	@ManyToOne
 	@JoinColumn(name = "user_id", nullable = false)
 	private User user;
@@ -35,39 +37,24 @@ public class Account {
 		this.user = user;
 	}
 
-	public Long getId() {
-		return id;
+	public boolean hasInsufficientFunds(BigDecimal amount) {
+		return this.balance.compareTo(amount) < 0;
 	}
 
-	public String getAccountNumber() {
-		return accountNumber;
+	public void withdraw(BigDecimal amount) {
+		this.balance = this.balance.subtract(amount);
 	}
 
-	public void setAccountNumber(String accountNumber) {
-		this.accountNumber = accountNumber;
+	public void deposit(BigDecimal amount) {
+		this.balance = this.balance.add(amount);
 	}
 
-	public BigDecimal getBalance() {
-		return balance;
+	public boolean isTheSameAccount(Account account) {
+		return this.accountNumber.equals(account.accountNumber);
 	}
 
-	public void setBalance(BigDecimal balance) {
-		this.balance = balance;
+	public boolean isTheSameCurrency(Account account) {
+		return this.currency.equals(account.currency);
 	}
 
-	public String getCurrency() {
-		return currency;
-	}
-
-	public void setCurrency(String currency) {
-		this.currency = currency;
-	}
-
-	public User getUser() {
-		return user;
-	}
-
-	public void setUser(User user) {
-		this.user = user;
-	}
 }

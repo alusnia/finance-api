@@ -32,7 +32,6 @@ public class AccountController {
 	public Account createAccount(@PathVariable Long userId, @RequestBody Account account) {
 		User owner = userRepository.findById(userId)
 				.orElseThrow(() -> new IllegalArgumentException("User not found with id: " + userId));
-
 		account.setUser(owner);
 
 		return accountRepository.save(account);
@@ -48,8 +47,16 @@ public class AccountController {
 		accountService.transferMoney(
 				transferRequest.getAccountId(),
 				transferRequest.getReceiverAccountNumber(),
+				transferRequest.getTitle(),
 				transferRequest.getAmount()
 		);
 		return "Transfer successful";
+	}
+
+	@DeleteMapping("/{id}")
+	public void deleteAccount(@PathVariable @RequestBody Long id) {
+		Account account = accountRepository.findById(id)
+				.orElseThrow(() -> new IllegalArgumentException("Account not found with id: " + id));
+		accountRepository.delete(account);
 	}
 }
