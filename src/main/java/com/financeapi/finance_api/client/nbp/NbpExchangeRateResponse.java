@@ -1,4 +1,4 @@
-package com.financeapi.finance_api.dto;
+package com.financeapi.finance_api.dto.transaction;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 

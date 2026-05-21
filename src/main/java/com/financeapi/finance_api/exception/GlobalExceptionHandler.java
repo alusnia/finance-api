@@ -2,8 +2,6 @@ package com.financeapi.finance_api.exception;
 
 import com.financeapi.finance_api.dto.ErrorResponse;
 import lombok.extern.slf4j.Slf4j;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.HttpStatusCode;
@@ -26,7 +24,7 @@ public class GlobalExceptionHandler {
 				ex.getErrorCode(),
 				ex.getMessage()
 		);
-		return new ResponseEntity<>(error, HttpStatus.BAD_REQUEST);
+		return new ResponseEntity<>(error, ex.getStatus());
 	}
 
 	@ExceptionHandler(HttpMessageNotReadableException.class)
@@ -54,7 +52,7 @@ public class GlobalExceptionHandler {
 		ErrorResponse error = new ErrorResponse(
 				HttpStatus.CONFLICT.value(),
 				"DB_CONFLICT",
-				"Data is not unique."
+				"Data is not valid."
 		);
 		return new ResponseEntity<>(error, HttpStatus.CONFLICT);
 	}
