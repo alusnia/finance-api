@@ -1,4 +1,4 @@
-package com.financeapi.finance_api.core.security;
+package com.financeapi.finance_api.core.security.global;
 
 import com.financeapi.finance_api.user.entity.User;
 import io.jsonwebtoken.Jwts;
@@ -28,6 +28,25 @@ public class JwtService {
 				.expiration(new Date(System.currentTimeMillis() + timeInMillis))
 				.signWith(getSignInKey())
 				.compact();
+	}
+
+	public String generateToken(String id, String pesel, long timeInMillis) {
+		return Jwts.builder()
+				.subject(id)
+				.claim("pesel", pesel)
+				.issuedAt(new Date())
+				.expiration(new Date(System.currentTimeMillis() + timeInMillis))
+				.signWith(getSignInKey())
+				.compact();
+	}
+
+	public String extractPesel(String token) {
+		return Jwts.parser()
+				.verifyWith(getSignInKey())
+				.build()
+				.parseSignedClaims(token)
+				.getPayload()
+				.get("pesel", String.class);
 	}
 
 	public String extractRole(String token) {

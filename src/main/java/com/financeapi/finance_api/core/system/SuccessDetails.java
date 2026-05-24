@@ -17,9 +17,9 @@ public enum SuccessDetails {
 	// --- MISC ---
 
 	// --- REGISTRATION ---
-	PESEL_FREE("PESEL_FREE", "Pesel is free", "/api/user/register"),
-	PESEL_NOT_FREE("PESEL_NOT_FREE", "Pesel is not free, please verify conflict", "/api/user/register"),
-
+	PESEL_FREE("PESEL_FREE", "Pesel is free", "/api/register"),
+	PESEL_NOT_FREE("PESEL_NOT_FREE", "Pesel is not free, please verify conflict", "/api/register"),
+	USER_REGISTERED("USER_REGISTERED", "User registered successfully.", "/api/login"),
 	// --- SECURITY ---
 
 	// --- TRANSACTION ---

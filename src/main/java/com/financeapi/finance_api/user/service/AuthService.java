@@ -2,11 +2,11 @@ package com.financeapi.finance_api.user.service;
 
 import com.financeapi.finance_api.user.controller.dto.LoginResponse;
 import com.financeapi.finance_api.user.entity.User;
-import com.financeapi.finance_api.core.security.TokenExpiration;
+import com.financeapi.finance_api.core.security.global.TokenExpiration;
 import com.financeapi.finance_api.core.exception.BankingException;
 import com.financeapi.finance_api.core.exception.BankingException.LogType;
 import com.financeapi.finance_api.user.repository.UserRepository;
-import com.financeapi.finance_api.core.security.JwtService;
+import com.financeapi.finance_api.core.security.global.JwtService;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 

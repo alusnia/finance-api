@@ -16,16 +16,19 @@ public class UserCredentials {
 	@Id
 	private Long id;
 
-	@Column(unique = true, nullable = false)
-	private String username;
+	@Setter
+	@Column(name = "CIF", unique = true, nullable = false)
+	private String cif;
 
 	@Setter
-	@Column(name = "password_hash",nullable = false)
+	@Column(name = "password_hash")
 	private String passwordHash;
 
+	@Setter
 	@Column(unique = true, nullable = false, length = 11)
 	private String pesel;
 
+	@Setter
 	@Column(name = "mothers_maiden_name", nullable = false)
 	private String mothersMaidenName;
 
@@ -41,10 +44,10 @@ public class UserCredentials {
 	public UserCredentials() {
 	}
 
-	public UserCredentials(Long id, String username, String passwordHash, String pesel,
-						   String mothersMaidenName, String resetToken, User user) {
+	public UserCredentials(Long id, String cif, String passwordHash, String pesel,
+	                       String mothersMaidenName, String resetToken, User user) {
 		this.id = id;
-		this.username = username;
+		this.cif = cif;
 		this.passwordHash = passwordHash;
 		this.pesel = pesel;
 		this.mothersMaidenName = mothersMaidenName;

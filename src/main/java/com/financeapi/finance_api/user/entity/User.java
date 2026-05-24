@@ -28,9 +28,11 @@ public class User {
 	@Embedded
 	private SecurityLock securityLock = new SecurityLock(LockType.OPEN);
 
+	@Setter
 	@OneToOne(mappedBy = "user",  cascade = CascadeType.ALL)
 	private Profile profile;
 
+	@Setter
 	@OneToOne(mappedBy = "user",  cascade = CascadeType.ALL)
 	private UserCredentials userCredentials;
 

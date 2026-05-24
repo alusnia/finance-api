@@ -1,4 +1,4 @@
-package com.financeapi.finance_api.core.security;
+package com.financeapi.finance_api.core.security.global;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

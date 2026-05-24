@@ -41,13 +41,13 @@ public class AccountService {
 //	public String generateUniqueAccountNumber() {
 //		String accountNumber;
 //
-//		for(int i = 0; i < 100; i++) {
+//		for(int i = 0; i < 1000; i++) {
 //			accountNumber = generateAccountNumber();
 //			if (!accountRepository.existsByAccountNumber(accountNumber)) {
 //				return accountNumber;
 //			}
 //		}
-//		throw new BankingException(ACCOUNT_NUMBER_GENERATION);
+//		throw new BankingException(NUMBER_GENERATION);
 //	}
 //
 //	public boolean isCurrencyValid(String currency) {

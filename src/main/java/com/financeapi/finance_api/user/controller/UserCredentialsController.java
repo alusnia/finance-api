@@ -14,18 +14,17 @@ public class UserCredentialsController {
 		this.userCredentialsService = userCredentialsService;
 	}
 
-//	@PostMapping("/password/reset")
-//	public ResponseEntity<String> resetPassword(@RequestBody ResetPasswordRequest request) {
-//		String token = request.getToken();
-//		String newPassword = request.getNewPassword();
-//		userCredentialsService.resetPassword(token, newPassword);
-//		return ResponseEntity.ok("Password saved successfully.");
-//	}
+	@PostMapping("/password/reset/{token}")
+	public ResponseEntity<String> resetPassword(@PathVariable String token, @RequestBody ResetPasswordRequest request) {
+		String newPassword = request.getNewPassword();
+		userCredentialsService.resetPassword(token, newPassword);
+		return ResponseEntity.ok("Password saved successfully.");
+	}
 
-//	@PostMapping("/password/forgot")
-//	public ResponseEntity<String> resetPassword(@RequestBody ForgotPasswordRequest request) {
-//		String key = request.getKey();
-//		String type = userCredentialsService.forgotPassword(key);
-//		return ResponseEntity.ok("Message sent successfully! Please check your email.");
-//	}
+	@PostMapping("/password/forgot")
+	public ResponseEntity<String> resetPassword(@RequestBody ForgotPasswordRequest request) {
+		String key = request.getKey();
+		String type = userCredentialsService.forgotPassword(key);
+		return ResponseEntity.ok("Message sent successfully! Please check your email.");
+	}
 }
