@@ -61,4 +61,10 @@ public class SuccessResponse<T> {
 	public SuccessResponse<T> withCustomUrl(String url) {
 		return new SuccessResponse<T>(this.content, this.status, this.message, url);
 	}
+
+	//[Generic Response]
+	public SuccessResponse<T> extendUrl(String string) {
+		String newUrl = String.format("%s/%s", this.getNextActionUrl(), string);
+		return new SuccessResponse<T>(this.content, this.status, this.message, newUrl);
+	}
 }

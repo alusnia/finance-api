@@ -6,6 +6,7 @@ import com.financeapi.finance_api.registration.controller.dto.CheckPeselRequest;
 import com.financeapi.finance_api.registration.controller.dto.RegisterRequest;
 import com.financeapi.finance_api.registration.mapper.RegistrationMapper;
 import com.financeapi.finance_api.registration.service.RegistrationService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
@@ -17,17 +18,12 @@ import static com.financeapi.finance_api.core.security.global.TokenExpiration.*;
 import static com.financeapi.finance_api.core.system.SuccessDetails.*;
 
 @RestController
+@RequiredArgsConstructor
 @RequestMapping("/api/registration")
 public class RegistrationController {
 	private final RegistrationService registrationService;
 	private final JwtService jwtService;
 	private final RegistrationMapper registrationMapper;
-
-	public RegistrationController (RegistrationService registrationService,  JwtService jwtService,  RegistrationMapper registrationMapper) {
-		this.registrationService = registrationService;
-		this.jwtService = jwtService;
-		this.registrationMapper = registrationMapper;
-	}
 
 	@PreAuthorize("hasAnyRole('HEAD_ADMIN', 'ADMIN', 'EMPLOYEE')")
 	@PostMapping("/verify")
@@ -54,7 +50,7 @@ public class RegistrationController {
 		Long id = registrationService.registerUser(registrationMapper.toCommand(request, pesel));
 		URI location = ServletUriComponentsBuilder
 				.fromCurrentContextPath()
-				.path("/api/users.{id}")
+				.path("/api/users/{id}")
 				.buildAndExpand(id)
 				.toUri();
 		return ResponseEntity.created(location).body(new SuccessResponse<>(USER_REGISTERED));

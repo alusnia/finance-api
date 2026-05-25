@@ -2,13 +2,17 @@ package com.financeapi.finance_api.user.entity;
 
 import com.financeapi.finance_api.account.entity.Account;
 import jakarta.persistence.*;
+import lombok.Builder;
 import lombok.Setter;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.financeapi.finance_api.user.entity.Role.USER;
+
 @lombok.Getter
 @Entity
+@Builder
 @Table(name = "bank_users")
 public class User {
 
@@ -17,14 +21,16 @@ public class User {
 	private Long id;
 
 	@Setter
+	@Builder.Default
 	@Enumerated(EnumType.STRING)
 	@Column(name = "role", nullable = false)
-	private Role role;
+	private Role role = USER;
 
 	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
 	private List<Account> accounts = new ArrayList<>();
 
 	@Setter
+	@Builder.Default
 	@Embedded
 	private SecurityLock securityLock = new SecurityLock(LockType.OPEN);
 

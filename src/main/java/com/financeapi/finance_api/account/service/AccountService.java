@@ -51,6 +51,6 @@ public class AccountService {
 //	}
 //
 //	public boolean isCurrencyValid(String currency) {
-//		return Arrays.stream(Currencies.values()).anyMatch(currencies -> currencies.name().equals(currency));
+//		return Arrays.stream(Currencies.values()).anyMatch(currencies -> currencies.firstname().equals(currency));
 //	}
 }

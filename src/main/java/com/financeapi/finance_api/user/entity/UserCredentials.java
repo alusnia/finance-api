@@ -2,6 +2,7 @@ package com.financeapi.finance_api.user.entity;
 
 import com.financeapi.finance_api.core.exception.BankingException;
 import jakarta.persistence.*;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -9,6 +10,7 @@ import static com.financeapi.finance_api.core.exception.BankingError.*;
 import static com.financeapi.finance_api.core.exception.BankingException.LogType.*;
 
 @Getter
+@Builder
 @Entity
 @Table(name = "user_credentials")
 public class UserCredentials {
@@ -36,6 +38,7 @@ public class UserCredentials {
 	@Column(name = "reset_token")
 	private String resetToken;
 
+	@Setter
 	@OneToOne(fetch = FetchType.LAZY)
 	@MapsId
 	@JoinColumn(name = "user_id")

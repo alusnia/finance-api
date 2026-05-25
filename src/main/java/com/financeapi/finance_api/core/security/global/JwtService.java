@@ -1,5 +1,6 @@
 package com.financeapi.finance_api.core.security.global;
 
+import com.financeapi.finance_api.user.entity.Role;
 import com.financeapi.finance_api.user.entity.User;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.io.Decoders;
@@ -20,7 +21,7 @@ public class JwtService {
 		return Keys.hmacShaKeyFor(keyBytes);
 	}
 
-	public String generateToken(User user,  long timeInMillis) {
+	public String generateToken(User user, long timeInMillis) {
 		return Jwts.builder()
 				.subject(user.getId().toString())
 				.claim("role", user.getRole().toString())
@@ -34,6 +35,16 @@ public class JwtService {
 		return Jwts.builder()
 				.subject(id)
 				.claim("pesel", pesel)
+				.issuedAt(new Date())
+				.expiration(new Date(System.currentTimeMillis() + timeInMillis))
+				.signWith(getSignInKey())
+				.compact();
+	}
+
+	public String generateRegistrationToken(Long userId,  long timeInMillis) {
+		return Jwts.builder()
+				.subject(userId.toString())
+				.claim("role", Role.USER.toString())
 				.issuedAt(new Date())
 				.expiration(new Date(System.currentTimeMillis() + timeInMillis))
 				.signWith(getSignInKey())

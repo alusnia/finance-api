@@ -1,11 +1,13 @@
 package com.financeapi.finance_api.user.entity;
 
 import jakarta.persistence.*;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 
 @Setter
 @Getter
+@Builder
 @Table(name = "profiles")
 public class Profile {
 
