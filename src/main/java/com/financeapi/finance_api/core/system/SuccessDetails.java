@@ -5,7 +5,7 @@ import lombok.Getter;
 @Getter
 public enum SuccessDetails {
 	// --- ACCOUNT ---
-
+	ACCOUNT_CREATED("ACCOUNT_CREATED", "Account created successfully"),
 	// --- AUTH ---
 	LOGIN_SUCCESS("LOGIN_SUCCESS", "User logged in successfully."),
 	NO_PROFILE("NO_PROFILE", "User logged in but some data is required.", "/api/user/profile"),
@@ -17,8 +17,8 @@ public enum SuccessDetails {
 	// --- MISC ---
 
 	// --- REGISTRATION ---
-	PESEL_FREE("PESEL_FREE", "Pesel is free", "/api/register"),
-	PESEL_NOT_FREE("PESEL_NOT_FREE", "Pesel is not free, please verify conflict", "/api/register"),
+	PESEL_FREE("PESEL_FREE", "Pesel is free", "/api/registration"),
+	PESEL_NOT_FREE("PESEL_NOT_FREE", "Pesel is not free, please verify conflict"),
 	USER_REGISTERED("USER_REGISTERED", "User registered successfully.", "/api/login"),
 	// --- SECURITY ---
 

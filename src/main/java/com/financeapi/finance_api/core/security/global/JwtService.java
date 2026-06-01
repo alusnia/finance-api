@@ -1,7 +1,6 @@
 package com.financeapi.finance_api.core.security.global;
 
-import com.financeapi.finance_api.user.entity.Role;
-import com.financeapi.finance_api.user.entity.User;
+import com.financeapi.finance_api.core.system.Role;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
@@ -21,60 +20,62 @@ public class JwtService {
 		return Keys.hmacShaKeyFor(keyBytes);
 	}
 
-	public String generateToken(User user, long timeInMillis) {
+	public String generateToken(TokenCommand command) {
 		return Jwts.builder()
-				.subject(user.getId().toString())
-				.claim("role", user.getRole().toString())
+				.subject(command.cif())
+				.claim("id", command.id())
+				.claim("role", command.role().toString())
+				.claim("email", command.email())
 				.issuedAt(new Date())
-				.expiration(new Date(System.currentTimeMillis() + timeInMillis))
+				.expiration(new Date(System.currentTimeMillis() + command.timeInMillis()))
 				.signWith(getSignInKey())
 				.compact();
 	}
 
-	public String generateToken(String id, String pesel, long timeInMillis) {
-		return Jwts.builder()
-				.subject(id)
-				.claim("pesel", pesel)
-				.issuedAt(new Date())
-				.expiration(new Date(System.currentTimeMillis() + timeInMillis))
-				.signWith(getSignInKey())
-				.compact();
-	}
-
-	public String generateRegistrationToken(Long userId,  long timeInMillis) {
-		return Jwts.builder()
-				.subject(userId.toString())
-				.claim("role", Role.USER.toString())
-				.issuedAt(new Date())
-				.expiration(new Date(System.currentTimeMillis() + timeInMillis))
-				.signWith(getSignInKey())
-				.compact();
-	}
-
-	public String extractPesel(String token) {
+	private String extractCif(String token, SecretKey key) {
 		return Jwts.parser()
-				.verifyWith(getSignInKey())
-				.build()
-				.parseSignedClaims(token)
-				.getPayload()
-				.get("pesel", String.class);
-	}
-
-	public String extractRole(String token) {
-		return Jwts.parser()
-				.verifyWith(getSignInKey())
-				.build()
-				.parseSignedClaims(token)
-				.getPayload()
-				.get("role", String.class);
-	}
-
-	public String extractUserId(String token) {
-		return Jwts.parser()
-				.verifyWith(getSignInKey())
+				.verifyWith(key)
 				.build()
 				.parseSignedClaims(token)
 				.getPayload()
 				.getSubject();
+	}
+
+	private Role extractRole(String token, SecretKey key) {
+		return Jwts.parser()
+				.verifyWith(key)
+				.build()
+				.parseSignedClaims(token)
+				.getPayload()
+				.get("role", Role.class);
+	}
+
+	private String extractEmail(String token, SecretKey key) {
+		return Jwts.parser()
+				.verifyWith(key)
+				.build()
+				.parseSignedClaims(token)
+				.getPayload()
+				.get("email", String.class);
+	}
+
+	private Long extractId(String token, SecretKey key) {
+		return Long.parseLong(Jwts.parser()
+				.verifyWith(key)
+				.build()
+				.parseSignedClaims(token)
+				.getPayload()
+				.get("id", String.class)
+		);
+	}
+
+	public TokenResponse extractInfo(String token) {
+		SecretKey key = getSignInKey();
+		return new TokenResponse(
+				extractCif(token, key),
+				extractId(token, key),
+				extractRole(token, key),
+				extractEmail(token, key)
+		);
 	}
 }

@@ -12,9 +12,10 @@ public enum BankingError {
 	// --- AUTH (AUTH_xxx) ---
 	AUTH_ACCESS_DENIED_LOGIN("AUTH_001", "Invalid login or password.", HttpStatus.UNAUTHORIZED, "Login was incorrect."),
 	AUTH_ACCESS_DENIED_PASSWORD("AUTH_001", "Invalid login or password.", HttpStatus.UNAUTHORIZED, "Password was incorrect."),
-
+	AUTH_ACCESS_DENIED_LOCK("AUTH_002", "Attempt blocked due to to many attempts.", HttpStatus.LOCKED),
 	// --- CURRENCY (CURR_xxx) ---
-	CURRENCY_NO_RATES_AVAILABLE("CURR_001", "Currency rates are not available.\nTry again later.", HttpStatus.GATEWAY_TIMEOUT),
+	WRONG_CURRENCY("CURR_001", "Invalid currency.", HttpStatus.BAD_REQUEST),
+	CURRENCY_NO_RATES_AVAILABLE("CURR_002", "Currency rates are not available.\nTry again later.", HttpStatus.GATEWAY_TIMEOUT),
 
 	// --- EMAIL (EMIL_xxx) ---
 	EMAIL_NOT_SENT("EMIL_001", "Email message attempt failed.", HttpStatus.INTERNAL_SERVER_ERROR),
@@ -32,7 +33,7 @@ public enum BankingError {
 	NOT_FOUND("MISC_003", "Not found.", HttpStatus.NOT_FOUND),
 
 	// --- REGISTRATION (RGSR_xxx) ---
-	REGISTRATION_MAIL_NOT_SEND("RGSR_001", "Email message attempt failed.", HttpStatus.INTERNAL_SERVER_ERROR),
+	PESEL_NOT_SEARCHED("REGR_001", "Pesel was not searched in last 30 minutes by this user.", HttpStatus.BAD_REQUEST),
 	// --- SECURITY (SEC_xxx) ---
 
 	// --- TRANSACTION (TRAN_xxx) ---

@@ -1,7 +1,7 @@
 package com.financeapi.finance_api.core.security;
 
-import com.financeapi.finance_api.account.entity.Account;
-import com.financeapi.finance_api.account.repository.AccountRepository;
+import com.financeapi.finance_api.account.internal.core.Account;
+import com.financeapi.finance_api.account.internal.core.AccountRepository;
 import org.springframework.stereotype.Component;
 
 import java.util.Optional;

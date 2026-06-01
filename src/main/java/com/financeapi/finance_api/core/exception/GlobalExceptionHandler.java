@@ -36,14 +36,20 @@ public class GlobalExceptionHandler {
 
 	@ExceptionHandler(MethodArgumentNotValidException.class)
 	public ResponseEntity<ErrorResponse> handleValidationExceptions(MethodArgumentNotValidException ex) {
+
+		String errorMessage = ex.getBindingResult().getFieldErrors().stream()
+				.map(fieldError -> fieldError.getField() + ": " + fieldError.getDefaultMessage())
+				.reduce((msg1, msg2) -> msg1 + ", " + msg2)
+				.orElse(BankingError.WRONG_ARGUMENT.getMessage());
+
 		ErrorResponse error = new ErrorResponse(
 				HttpStatus.BAD_REQUEST.value(),
-				"VALIDATION_ERROR",
-				"Data sent is wrong or incomplete."
+				BankingError.WRONG_ARGUMENT.getCode(),
+				errorMessage
 		);
+
 		return new ResponseEntity<>(error, HttpStatus.BAD_REQUEST);
 	}
-
 	@ExceptionHandler(DataIntegrityViolationException.class)
 	public ResponseEntity<ErrorResponse> handleIntegrityExceptions(DataIntegrityViolationException ex) {
 		ErrorResponse error = new ErrorResponse(
