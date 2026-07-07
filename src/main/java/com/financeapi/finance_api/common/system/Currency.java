@@ -1,4 +1,4 @@
-package com.financeapi.finance_api.core.system;
+package com.financeapi.finance_api.common.system;
 
 public enum Currencies {
 	PLN,

@@ -1,4 +1,4 @@
-package com.financeapi.finance_api.exchange.internal;
+package com.financeapi.finance_api.fx.internal.reference.core;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;

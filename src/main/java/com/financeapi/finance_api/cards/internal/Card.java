@@ -1,7 +1,7 @@
 package com.financeapi.finance_api.account.internal.card;
 
-import com.financeapi.finance_api.core.security.SecurityLock;
-import com.financeapi.finance_api.core.security.LockType;
+import com.financeapi.finance_api.common.security.SecurityLock;
+import com.financeapi.finance_api.common.security.LockType;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
